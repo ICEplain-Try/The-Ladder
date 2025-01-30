@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Greeting</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <h1>Greeting</h1>
+
+        <form>
+            <label for="nameInput">Your Name:</label>
+            <input id="nameInput" type="text" />
+            <button id="clickMeButton" type="button">Click Me</button>
+        </form>
+        
+
+        <script>
+            function helloWorld() {
+
+                let nameInput = document.getElementById('nameInput');
+                let name = nameInput.value;
+                name = name.toUpperCase();
+                let message = 'Hello ' + name + '!';
+
+                alert(message);
+            }
+
+            let clickMeButton = document.getElementById('clickMeButton');
+            clickMeButton.addEventListener('click', helloWorld);
+        </script>
+    </body>
+</html>

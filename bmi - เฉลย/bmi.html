@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BMI Calculator</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <h1>BMI Calculator</h1>
+
+        <form>
+            <div>
+                <label for="weightInput">น้ำหนัก:</label>
+                <input type="number" id="weightInput" />
+                <span>กิโลกรัม</span>
+            </div>
+            <div>
+                <label for="heightInput">ส่วนสูง:</label>
+                <input type="number" id="heightInput" />
+                <span>เซ็นติเมตร</span>
+            </div>
+
+            <button id="calculateButton" type="button">คำนวณ</button>
+        </form>
+        
+
+        <script>
+            function calculateBmi() {
+
+                let weightInput = document.getElementById('weightInput');
+                let weight = weightInput.value;
+
+                if (weight <= 0) {
+                    weightInput.focus();
+                    alert('กรุณาระบุน้ำหนักให้ถูกต้อง');
+                    return;
+                }
+
+                let heightInput = document.getElementById('heightInput');
+                let height = heightInput.value;
+
+                if (height <= 0) {
+                    heightInput.focus();
+                    alert('กรุณาระบุส่วนสูงให้ถูกต้อง');
+                    return;
+                }
+
+                let heightInMeter = height / 100;
+                let heightSquare = heightInMeter ** 2;
+
+                let bmi = weight / heightSquare;
+
+                let message = 'BMI = ' + bmi;
+
+                alert(message);
+                
+            }
+
+            let calculateButton = document.getElementById('calculateButton');
+            calculateButton.addEventListener('click', calculateBmi);
+        </script>
+    </body>
+</html>

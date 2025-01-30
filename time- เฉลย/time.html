@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Greeting Time</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <h1>Greeting Time</h1>
+
+        <form>
+            <label for="timeInput">เวลา:</label>
+            <input id="timeInput" type="number" />
+            <span>นาฬิกา</span>
+            <button id="greetButton" type="button">ทักทาย</button>
+        </form>
+        
+
+        <script>
+            /* 
+            comment
+            comment
+            */
+            function greet() {
+
+                let timeInput = document.getElementById('timeInput');
+                let time = timeInput.value;
+
+                // validate
+                if (time == '') {
+                    timeInput.focus();
+                    alert('กรุณาระบุเวลา');
+                    return;
+                }
+
+                if (time < 0 || time > 23)  {
+                    timeInput.focus();
+                    alert('กรุณาระบุเวลาให้ถูกต้อง');
+                    return;
+                }
+
+                let message;
+
+                if (time <= 9) {
+                    message = 'Good morning';
+                } else if (time <= 19) {
+                    message = 'Good day';
+                } else {
+                    message = 'Good evening';
+                }
+
+                alert(message);
+            }
+
+            let greetButton = document.getElementById('greetButton');
+            greetButton.addEventListener('click', greet);
+        </script>
+    </body>
+</html>

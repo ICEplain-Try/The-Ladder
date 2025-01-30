@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello World</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <h1>Hello World</h1>
+
+        <button id="clickMeButton">Click Me</button>
+
+        <script>
+            function helloWorld() {
+                alert('Hello Event!');
+            }
+
+            let clickMeButton = document.getElementById('clickMeButton');
+            clickMeButton.addEventListener('click', helloWorld);
+        </script>
+    </body>
+</html>

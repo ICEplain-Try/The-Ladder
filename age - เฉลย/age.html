@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Age Calculator</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <h1>Age Calculator</h1>
+
+        <form>
+            <label for="birthdateInput">Your Birthdate:</label>
+            <input id="birthdateInput" type="date" />
+            <button id="calculateButton" type="button">Calculate</button>
+        </form>
+        
+
+        <script>
+            function calculate() {
+
+                let birthdateInput = document.getElementById('birthdateInput');
+                let birthdate = birthdateInput.value;
+
+                if (birthdate == '') {
+                    alert('Please input birthdate');
+                    birthdateInput.focus();
+                    return;
+                }
+
+                let birthdateDate = new Date(birthdate);
+                let now = new Date();
+
+                let age = now.getFullYear() - birthdateDate.getFullYear();
+
+                let dateFormat = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric'});
+
+                let message = 'Your birthdate is ' + dateFormat.format(birthdateDate) + '\nYour age is ' + age;
+
+                alert(message);
+            }
+
+            let calculateButton = document.getElementById('calculateButton');
+            calculateButton.addEventListener('click', calculate);
+        </script>
+    </body>
+</html>

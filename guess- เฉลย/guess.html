@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Guess Number</title>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <h1>Guess Number</h1>
+
+    <form>
+        <label for="numberInput">Guess 1-100:</label>
+        <input id="numberInput" type="number" />
+        <button id="guessButton" type="button">Guess</button>
+    </form>
+
+
+    <script>
+
+        let answer;
+        let guessCount;
+        reset();
+
+        function reset() {
+            answer = getRandomInt(100) + 1;
+            guessCount = 0;
+        }
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        function guess() {
+
+            let numberInput = document.getElementById('numberInput');
+            let number = numberInput.value;
+
+            if (number == '') {
+                alert('Please input a number');
+                numberInput.focus();
+                return;
+            }
+
+            number = Number(number);
+
+            if (!Number.isInteger(number)) {
+                alert('Please input an integer number');
+                numberInput.focus();
+                return;
+            }
+            if (number < 1 || number > 100) {
+                alert('Please input a number between 1-100');
+                numberInput.focus();
+                return;
+            }
+
+            guessCount++;
+
+            let message = 'Try #' + guessCount + ': ';
+
+            if (number < answer) {
+                message += number + ' is too low';
+            } else if (number > answer) {
+                message += number + ' is too high';
+            } else {
+                message += number + ' is correct !';
+                reset();
+            }
+
+            alert(message);
+        }
+
+        let guessButton = document.getElementById('guessButton');
+        guessButton.addEventListener('click', guess);
+    </script>
+</body>
+
+</html>
