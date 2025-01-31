@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Guess Number</title>
+    <meta charset="utf-8" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #message {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        #answerBox {
+            display: none;
+            font-size: 18px;
+            margin-top: 10px;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Guess Number</h1>
+
+    <form>
+        <label for="numberInput">Guess 1-100:</label>
+        <input id="numberInput" type="number" />
+        <button id="guessButton" type="button">Guess</button>
+        <button id="resetButton" type="button">Restart</button>
+        <button id="showAnswerButton" type="button">Show Answer</button>
+    </form>
+
+    <!-- แสดงข้อความคำแนะนำ -->
+    <div id="message">ตัวเลขนี้อยู่ระหว่าง 1 ถึง 100</div>
+    <div id="answerBox"></div>
+
+    <script>
+        let answer;
+        let guessCount;
+        reset();
+
+        function reset() {
+            answer = getRandomInt(100) + 1;
+            guessCount = 0;
+            document.getElementById("message").innerText = "ตัวเลขนี้อยู่ระหว่าง 1 ถึง 100";
+            document.getElementById("numberInput").value = "";
+            document.getElementById("answerBox").style.display = "none"; // ซ่อนคำเฉลย
+        }
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        function guess() {
+            let numberInput = document.getElementById('numberInput');
+            let number = numberInput.value;
+            let messageDiv = document.getElementById("message");
+
+            if (number == '') {
+                messageDiv.innerText = "กรุณาใส่ตัวเลขก่อน!";
+                numberInput.focus();
+                return;
+            }
+
+            number = Number(number);
+
+            if (!Number.isInteger(number)) {
+                messageDiv.innerText = "กรุณาใส่เฉพาะเลขจำนวนเต็ม!";
+                numberInput.focus();
+                return;
+            }
+            if (number < 1 || number > 100) {
+                messageDiv.innerText = "กรุณาใส่ตัวเลขระหว่าง 1-100!";
+                numberInput.focus();
+                return;
+            }
+
+            guessCount++;
+
+            if (number < answer) {
+                messageDiv.innerText = "ต่ำไปนะ ลองเดาใหม่ดู (ลองครั้งที่ " + guessCount + ")";
+            } else if (number > answer) {
+                messageDiv.innerText = "สูงไปนะ ลองเดาใหม่ (ลองครั้งที่ " + guessCount + ")";
+            } else {
+                messageDiv.innerText = "🎉 ถูกต้อง ยินดีด้วย! 🎉";
+                reset();
+            }
+        }
+
+        function showAnswer() {
+            let answerBox = document.getElementById("answerBox");
+            answerBox.innerText = "เลขที่ซ่อนไว้คือ: " + answer;
+            answerBox.style.display = "block";
+        }
+
+        document.getElementById('guessButton').addEventListener('click', guess);
+        document.getElementById('resetButton').addEventListener('click', reset);
+        document.getElementById('showAnswerButton').addEventListener('click', showAnswer);
+    </script>
+</body>
+
+</html>
