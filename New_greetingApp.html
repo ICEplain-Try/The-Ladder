@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>New Greeting 02</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #message {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: blue;
+        }
+
+        #errorMessage {
+            font-size: 16px;
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Greeting</h1>
+
+    <form>
+        <div>
+            <label>Your Gender:</label>
+            <select id="genderInput">
+                <option value="None"> - </option>
+                <option value="Male"> Male </option>
+                <option value="Female"> Female </option>
+            </select>
+        </div>
+        <div>
+            <label>Your Name:</label>
+            <input type="text" id="nameInput">
+        </div>
+        <div>
+            <label>Your Birthdate:</label>
+            <input type="date" id="birthdateInput">
+        </div>
+
+        <button id="greetButton" type="button">Greeting</button>
+        <button id="resetButton" type="button">Reset</button>
+    </form>
+
+    <!-- แสดงข้อความผลลัพธ์ -->
+    <div id="message"></div>
+    <div id="errorMessage"></div>
+
+    <script>
+        function greet() {
+            let errorMessageDiv = document.getElementById("errorMessage");
+            let messageDiv = document.getElementById("message");
+            errorMessageDiv.innerText = ""; // เคลียร์ข้อความ error
+
+            let genderInput = document.getElementById('genderInput');
+            let titleName;
+            if (genderInput.value == 'None') {
+                errorMessageDiv.innerText = "Please select your gender.";
+                genderInput.focus();
+                return;
+            } else if (genderInput.value == 'Female') {
+                titleName = 'Ms.';
+            } else {
+                titleName = 'Mr.';
+            }
+
+            let nameInput = document.getElementById('nameInput');
+            let name = nameInput.value.trim();
+            if (name.length == 0) {
+                errorMessageDiv.innerText = "Please enter your name.";
+                nameInput.focus();
+                return;
+            }
+
+            let birthdateInput = document.getElementById('birthdateInput');
+            if (birthdateInput.value == '') {
+                errorMessageDiv.innerText = "Please enter your birthdate.";
+                birthdateInput.focus();
+                return;
+            }
+
+            let today = new Date();
+            let birthdate = new Date(birthdateInput.value);
+            let age = today.getFullYear() - birthdate.getFullYear();
+            if (age < 0) {
+                errorMessageDiv.innerText = "Your birthdate is invalid.";
+                birthdateInput.focus();
+                return;
+            }
+
+            let message = `Hello ${titleName} ${name}! Your age is ${age} years old.`;
+            messageDiv.innerText = message;
+        }
+
+        function resetForm() {
+            document.getElementById('genderInput').value = 'None';
+            document.getElementById('nameInput').value = '';
+            document.getElementById('birthdateInput').value = '';
+            document.getElementById('message').innerText = '';
+            document.getElementById('errorMessage').innerText = '';
+        }
+
+        document.getElementById('greetButton').addEventListener('click', greet);
+        document.getElementById('resetButton').addEventListener('click', resetForm);
+    </script>
+</body>
+
+</html>
